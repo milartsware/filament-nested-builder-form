@@ -1,11 +1,9 @@
 #!/bin/bash
 
 echo "🎨 Laravel Pint ile kod formatlanıyor..."
-./vendor/bin/pint
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.php');
+vendor/bin/pint $files -q
 
-echo "🎨 Laravel Scramble ile API dokümantasyonu analiz ediliyor..."
-php artisan scramble:analyze
-
-git add .
+git add $files
 
 echo "✅ Kod başarıyla formatlandı."
